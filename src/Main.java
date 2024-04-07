@@ -1,5 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -98,6 +100,12 @@ public class Main {
     }
     // OPTION 9
     public static void saveToFile(){
+        PrintWriter writer = null;
+        try{
+            writer = new PrintWriter(new FileOutputStream("SaveToFile.txt"));
 
+        }catch(FileNotFoundException e){
+            System.out.println("File to write on was not found");
+        }
     }
 }

@@ -97,8 +97,11 @@ public class DoublyLinkedList {
     }
 
     // Remove value
+
     // Remove after value
+
     // Remove before value
+
     // get size
     public int getSize() {
         return counter;
@@ -133,7 +136,6 @@ public class DoublyLinkedList {
     }
 
     private class Node {
-
         // Data
         private int value;
         // Links

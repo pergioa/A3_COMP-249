@@ -53,7 +53,7 @@ public class LinkedList {
 
     }
 
-    // Add before a value. WE ONLY ADD IF THE REFERENCEVALUE exists
+    // Add before a value. WE ONLY ADD IF THE REFERENCE VALUE exists
     public void addBefore(int referenceValue, int newValue) {
         if (head == null) {
             return;
@@ -166,12 +166,10 @@ public class LinkedList {
     }
 
     private class Node {
-
         // Data
         private int value;
         // Link
         private Node next;
-
         public Node(int value, Node next) {
             this.value = value;
             this.next = next;

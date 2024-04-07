@@ -10,8 +10,18 @@ public class DoublyLinkedList {
         counter = 0;
     }
 
+    public Vocab get(int index){
+        Node temp = head;
+        if(index >= counter)
+            return null;
+        for(int i = index; i< counter;++i )
+            temp = temp.before;
+
+        return temp.value;
+    }
+
     // Add at head
-    public void addAtHead(String value) {
+    public void addAtHead(Vocab value) {
         Node temp = head;
         head = new Node(value, null, head);
 
@@ -25,7 +35,7 @@ public class DoublyLinkedList {
     }
 
     // Add at tail
-    public void addAtTail(String value) {
+    public void addAtTail(Vocab value) {
         Node temp = tail;
         tail = new Node(value, tail, null);
         if (head == null) {
@@ -38,7 +48,7 @@ public class DoublyLinkedList {
     }
 
     // Add after (while going from the head to tail)
-    public void addAfter(String referenceValue, String newValue) {
+    public void addAfter(Vocab referenceValue, Vocab newValue) {
         Node position = head;
         while (position != null && position.value != referenceValue) {
             position = position.after;
@@ -58,10 +68,30 @@ public class DoublyLinkedList {
         }
     }
 
+    public void addBefore(Vocab referenceValue, Vocab newValue) {
+        Node position = head;
+        while (position != null && !position.value.equals(referenceValue)) {
+            position = position.after;
+        }
+        if (position != null && position.value.equals(referenceValue)) {
+            // if the ref value is the last element
+            if (position.before == null) {
+                addAtHead(newValue);
+            } else {
+                Node n = new Node(newValue, null, null);
+                n.after = position.after;
+                n.before = position.before;
+                position.after.before = n;
+                position.after = n;
+                counter++;
+            }
+        }
+    }
+
     // Remove head
-    public String removeHead() {
+    public Vocab removeHead() {
         if (head == null) {
-            return "";
+            return null;
         } else if (head == tail) {
             Node temp = head;
             head = null;
@@ -78,9 +108,9 @@ public class DoublyLinkedList {
     }
 
     // Remove tail
-    public String removeTail() {
+    public Vocab removeTail() {
         if (tail == null) {
-            return "";
+            return null;
         } else if (head == tail) {
             Node temp = head;
             head = null;
@@ -97,10 +127,20 @@ public class DoublyLinkedList {
     }
 
     // Remove value
-
-    // Remove after value
-
-    // Remove before value
+    public void removeValue(Vocab value){
+        Node temp = head;
+        if(temp.value.equals(value)){
+            head = head.before;
+            return;
+        }
+        for(int i = 0; i<counter;++i){
+            if(temp.value.equals(value)){
+                temp.before.after = temp.after;
+                temp.after.before = temp.before;
+            }
+            temp = temp.before;
+        }
+    }
 
     // get size
     public int getSize() {
@@ -137,12 +177,12 @@ public class DoublyLinkedList {
 
     private class Node {
         // Data
-        private String value;
+        private Vocab value;
         // Links
         private Node after;
         private Node before;
 
-        public Node(String value, Node before, Node after) {
+        public Node(Vocab value, Node before, Node after) {
             this.value = value;
             this.before = before;
             this.after = after;

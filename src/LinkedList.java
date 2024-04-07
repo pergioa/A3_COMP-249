@@ -1,13 +1,22 @@
 public class LinkedList {
 
     private Node head;
-    private Node tail;
-    // Optional
+
     private int counter;
 
     public LinkedList() {
         head = null;
         counter = 0;
+    }
+
+    public String get(int index){
+        Node temp = head;
+        if(index >= counter)
+            return null;
+        for(int i = index; i< counter;++i )
+            temp = temp.next;
+
+        return temp.value;
     }
 
     // Add to head

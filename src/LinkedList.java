@@ -9,13 +9,14 @@ public class LinkedList {
         counter = 0;
     }
 
-    public String get(int index){
+    public String get(int index) {
         Node temp = head;
-        if(index >= counter)
+        if (index >= counter){
             return null;
-        for(int i = index; i< counter;++i )
-            temp = temp.next;
-
+        }else if(head != null){
+            for (int i = 0; i!=index; ++i)
+                temp = temp.next;
+    }
         return temp.value;
     }
 

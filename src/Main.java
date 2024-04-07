@@ -3,10 +3,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        DoublyLinkedList vocab_list = new DoublyLinkedList();
         boolean inMenu = true;
         Scanner sc = new Scanner(System.in);
         // Welcome Message
@@ -16,32 +18,19 @@ public class Main {
         do{
             switch (displayMenu(sc)){
                 case 0: inMenu = false; break;
-                case 1: browseTopic(); break;
+                case 1: browseTopic(sc, vocab_list); break;
                 case 2: insertNewTopicBeforeAnotherOne(); break;
                 case 3: insertNewTopicAfterAnotherOne(); break;
                 case 4: removeTopic(); break;
                 case 5: modifyTopic(); break;
                 case 6: searchTopicForAWord(); break;
-                case 7: loadFromFile(sc); break;
+                case 7: loadFromFile(sc, vocab_list); break;
                 case 8: showAllWordsWithLetter(); break;
                 case 9: saveToFile(); break;
                 default: System.out.println("Invalid input, please try again");
             }
         }while(inMenu);
 
-
-        Scanner reader = null;
-        try{
-            reader = new Scanner(new FileInputStream("A3_input_file.txt"));
-
-            // CHECK IF THERE IS #
-
-            // IF # THEN TOPIC NAME ELSE WORD
-
-            // USE THE DATA
-        } catch (FileNotFoundException e) {
-            System.out.println("Input file not found");
-        }
 
 
         System.out.println("Thank you for using our program. The program has ended succesfully, have a nice day");
@@ -62,7 +51,7 @@ public class Main {
         System.out.println("9 Save to file");
         System.out.println("0 Exit");
         System.out.println("-----------------------------------");
-        System.out.println("Enter Your Choice:");
+        System.out.print("Enter Your Choice: ");
         int choice = sc.nextInt();
         sc.nextLine();
         return choice;
@@ -70,8 +59,34 @@ public class Main {
 
 
     // OPTION 1
-    public static void browseTopic(){
-        System.out.println("1");
+    public static void browseTopic(Scanner sc, DoublyLinkedList dList){
+        boolean inBrowse = true;
+        do {
+            System.out.println("-----------------------------------");
+            System.out.println("         Pick a topic");
+            System.out.println("-----------------------------------");
+            // DISPLAY THE CURRENT TOPICS
+            for (int i = 0; i < dList.getSize(); i++) {
+                System.out.println(i + 1 + "  " + dList.get(i).topic);
+            }
+            System.out.println("0 Exit");
+            System.out.println("-----------------------------------");
+            System.out.print("Enter Your Choice: ");
+            int choice = sc.nextInt();
+                if (choice > dList.getSize()|| choice < 0) {
+                    System.out.println("Invalid input, please enter a valid choice");
+                } else {
+                    if (choice == 0) {
+                        inBrowse = false;
+                    } else {
+                        Vocab v = dList.get(choice-1);
+                        System.out.println("Topic: " + v.topic);
+                        for (int i=0; i<v.words.getSize(); i++){
+                            System.out.println(i+1+" " + v.words.get(i));
+                        }
+                    }
+                }
+        }while (inBrowse);
     }
     // OPTION 2
     public static void insertNewTopicBeforeAnotherOne(){
@@ -94,16 +109,37 @@ public class Main {
 
     }
     // OPTION 7
-    public static void loadFromFile(Scanner sc){
-        System.out.println("-----------------------------------");
-        System.out.println("         Pick a topic");
-        System.out.println("-----------------------------------");
-        // DISPLAY THE CURRENT TOPICS
-
-        System.out.println("-----------------------------------");
-        System.out.println("Enter Your Choice: ");
-        int choice = sc.nextInt();
-
+    public static void loadFromFile(Scanner sc, DoublyLinkedList dList){
+        System.out.println("Enter the name of the input file:");
+        String path = sc.nextLine();
+        Scanner reader = null;
+        String topic = "";
+        String temp = "";
+        boolean sameTopic = false;
+        ArrayList<String> words = new ArrayList<String>();
+        try{
+            reader = new Scanner(new FileInputStream(path));
+            while(reader.hasNextLine()){
+                temp = reader.nextLine();
+                // CHECK IF THERE IS #
+                if(!temp.equals("")){
+                    if(temp.charAt(0) == '#') {
+                        if( !(( temp.substring(1,temp.length()) ).equals(topic)) && !topic.equals("")){
+                            Vocab v = new Vocab(topic, words.toArray(new String[0]));
+                            dList.addAtHead(v);
+                            //System.out.println("Topic: "+ topic);
+                            //System.out.println("Words: " + words.size());
+                            words = new ArrayList<>();
+                        }
+                        topic = temp.substring(1, temp.length());
+                    }else {
+                        words.add(temp);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Input file not found");
+        }
     }
     // OPTION 8
     public static void showAllWordsWithLetter(){

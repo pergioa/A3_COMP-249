@@ -12,11 +12,13 @@ public class DoublyLinkedList {
 
     public Vocab get(int index){
         Node temp = head;
-        if(index >= counter)
-            return null;
-        for(int i = index; i< counter;++i )
-            temp = temp.before;
 
+        if(index >= counter) {
+            return null;
+        }else if(head != null){
+            for(int i = 0; i!=index; ++i )
+                temp = temp.after;
+        }
         return temp.value;
     }
 

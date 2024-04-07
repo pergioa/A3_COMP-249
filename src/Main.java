@@ -1,3 +1,4 @@
+import javax.xml.soap.SOAPPart;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,12 +8,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean inMenu = true;
+        Scanner sc = new Scanner(System.in);
         // Welcome Message
         System.out.println("Welcome to our Vocabulary Control Center!");
         System.out.println("Brought to you by Sergio Abreo Alvarez and Arturo Sanchez Escobar");
 
         do{
-            switch (displayMenu()){
+            switch (displayMenu(sc)){
                 case 0: inMenu = false; break;
                 case 1: browseTopic(); break;
                 case 2: insertNewTopicBeforeAnotherOne(); break;
@@ -20,7 +22,7 @@ public class Main {
                 case 4: removeTopic(); break;
                 case 5: modifyTopic(); break;
                 case 6: searchTopicForAWord(); break;
-                case 7: loadFromFile(); break;
+                case 7: loadFromFile(sc); break;
                 case 8: showAllWordsWithLetter(); break;
                 case 9: saveToFile(); break;
                 default: System.out.println("Invalid input, please try again");
@@ -45,10 +47,9 @@ public class Main {
         System.out.println("Thank you for using our program. The program has ended succesfully, have a nice day");
     }
 
-    public static int displayMenu(){
-        Scanner sc = new Scanner(System.in);
+    public static int displayMenu(Scanner sc){
         System.out.println("-----------------------------------");
-        System.out.println("Vocabulary Control Center");
+        System.out.println("     Vocabulary Control Center");
         System.out.println("-----------------------------------");
         System.out.println("1 Browse a topic");
         System.out.println("2 Insert a new topic before another one");
@@ -60,6 +61,8 @@ public class Main {
         System.out.println("8 Show all words starting with a given letter");
         System.out.println("9 Save to file");
         System.out.println("0 Exit");
+        System.out.println("-----------------------------------");
+        System.out.println("Enter Your Choice:");
         int choice = sc.nextInt();
         sc.nextLine();
         return choice;
@@ -91,7 +94,15 @@ public class Main {
 
     }
     // OPTION 7
-    public static void loadFromFile(){
+    public static void loadFromFile(Scanner sc){
+        System.out.println("-----------------------------------");
+        System.out.println("         Pick a topic");
+        System.out.println("-----------------------------------");
+        // DISPLAY THE CURRENT TOPICS
+
+        System.out.println("-----------------------------------");
+        System.out.println("Enter Your Choice: ");
+        int choice = sc.nextInt();
 
     }
     // OPTION 8

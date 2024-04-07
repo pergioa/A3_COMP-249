@@ -11,13 +11,13 @@ public class LinkedList {
     }
 
     // Add to head
-    public void addAtHead(int value) {
+    public void addAtHead(String value) {
         head = new Node(value, head);
         counter++;
     }
 
     // Add to end
-    public void addAtEnd(int value) {
+    public void addAtEnd(String value) {
         if (head == null) {
             addAtHead(value);
         } else {
@@ -34,7 +34,7 @@ public class LinkedList {
     }
 
     // Add after a value
-    public void addAfter(int referenceValue, int value) {
+    public void addAfter(String referenceValue, String value) {
 
         Node position = head;
 
@@ -54,7 +54,7 @@ public class LinkedList {
     }
 
     // Add before a value. WE ONLY ADD IF THE REFERENCEVALUE exists
-    public void addBefore(int referenceValue, int newValue) {
+    public void addBefore(String referenceValue, String newValue) {
         if (head == null) {
             return;
         }
@@ -75,7 +75,7 @@ public class LinkedList {
     }
 
     // Remove head
-    public int removeHead() {
+    public String removeHead() {
         if (head != null) {
             Node temp = head;
             head = head.next;
@@ -83,13 +83,13 @@ public class LinkedList {
             temp.next = null;
             return temp.value;
         }
-        return -1; // Or throw an Exception
+        return ""; // Or throw an Exception
     }
 
     // Remove tail/last one
-    public int removeLast() {
+    public String removeLast() {
         if (head == null) {
-            return -1;
+            return "";
         } else if (head.next == null) {
             return removeHead();
         } else {
@@ -105,9 +105,9 @@ public class LinkedList {
     }
 
     // Remove a value
-    public int removeValue(int value) {
+    public String removeValue(String value) {
         if (head == null) {
-            return - 1;
+            return "";
         }
         if (head.value == value) {
             return removeHead();
@@ -124,13 +124,13 @@ public class LinkedList {
                 return temp.value;
             }
         }
-        return -1;
+        return "";
     }
 
     // Remove after a value
-    public int removeAfter(int value) {
+    public String removeAfter(String value) {
         if (head == null) {
-            return -1;
+            return "";
         } else {
             Node position = head;
             while (position != null && position.value != value) {
@@ -142,7 +142,7 @@ public class LinkedList {
                 return temp.value;
             }
         }
-        return -1;
+        return "";
     }
 
     // get size
@@ -168,11 +168,11 @@ public class LinkedList {
     private class Node {
 
         // Data
-        private int value;
+        private String value;
         // Link
         private Node next;
 
-        public Node(int value, Node next) {
+        public Node(String value, Node next) {
             this.value = value;
             this.next = next;
         }

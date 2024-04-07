@@ -11,7 +11,7 @@ public class DoublyLinkedList {
     }
 
     // Add at head
-    public void addAtHead(int value) {
+    public void addAtHead(String value) {
         Node temp = head;
         head = new Node(value, null, head);
 
@@ -25,7 +25,7 @@ public class DoublyLinkedList {
     }
 
     // Add at tail
-    public void addAtTail(int value) {
+    public void addAtTail(String value) {
         Node temp = tail;
         tail = new Node(value, tail, null);
         if (head == null) {
@@ -38,7 +38,7 @@ public class DoublyLinkedList {
     }
 
     // Add after (while going from the head to tail)
-    public void addAfter(int referenceValue, int newValue) {
+    public void addAfter(String referenceValue, String newValue) {
         Node position = head;
         while (position != null && position.value != referenceValue) {
             position = position.after;
@@ -59,9 +59,9 @@ public class DoublyLinkedList {
     }
 
     // Remove head
-    public int removeHead() {
+    public String removeHead() {
         if (head == null) {
-            return -1;
+            return "";
         } else if (head == tail) {
             Node temp = head;
             head = null;
@@ -78,9 +78,9 @@ public class DoublyLinkedList {
     }
 
     // Remove tail
-    public int removeTail() {
+    public String removeTail() {
         if (tail == null) {
-            return -1;
+            return "";
         } else if (head == tail) {
             Node temp = head;
             head = null;
@@ -135,12 +135,12 @@ public class DoublyLinkedList {
     private class Node {
 
         // Data
-        private int value;
+        private String value;
         // Links
         private Node after;
         private Node before;
 
-        public Node(int value, Node before, Node after) {
+        public Node(String value, Node before, Node after) {
             this.value = value;
             this.before = before;
             this.after = after;

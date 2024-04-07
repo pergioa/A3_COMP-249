@@ -26,7 +26,7 @@ public class Main {
                 case 6: searchTopicForAWord(); break;
                 case 7: loadFromFile(sc, vocab_list); break;
                 case 8: showAllWordsWithLetter(); break;
-                case 9: saveToFile(); break;
+                case 9: saveToFile(vocab_list); break;
                 default: System.out.println("Invalid input, please try again");
             }
         }while(inMenu);
@@ -137,6 +137,7 @@ public class Main {
                     }
                 }
             }
+            reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Input file not found");
         }
@@ -146,11 +147,20 @@ public class Main {
 
     }
     // OPTION 9
-    public static void saveToFile(){
+    public static void saveToFile(DoublyLinkedList dList){
         PrintWriter writer = null;
+        Vocab v = null;
         try{
             writer = new PrintWriter(new FileOutputStream("SaveToFile.txt"));
-
+            for(int i = 0; i < dList.getSize(); i++){
+                v = dList.get(i);
+                writer.println("#"+v.topic);
+                for (int j=0; j<v.words.getSize(); j++){
+                    writer.println(v.words.get(j));
+                }
+                writer.println("");
+            }
+            writer.close();
         }catch(FileNotFoundException e){
             System.out.println("File to write on was not found");
         }

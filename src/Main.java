@@ -125,11 +125,7 @@ public class Main {
                 if(!temp.equals("")){
                     if(temp.charAt(0) == '#') {
                         if( !(( temp.substring(1,temp.length()) ).equals(topic)) && !topic.equals("")){
-                            Vocab v = new Vocab(topic, words.toArray(new String[0]));
-                            dList.addAtHead(v);
-                            //System.out.println("Topic: "+ topic);
-                            //System.out.println("Words: " + words.size());
-                            words = new ArrayList<>();
+                           addVocab(topic, words, dList);
                         }
                         topic = temp.substring(1, temp.length());
                     }else {
@@ -137,10 +133,20 @@ public class Main {
                     }
                 }
             }
+            addVocab(topic, words, dList);
             reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Input file not found");
         }
+    }
+
+    private static void addVocab(String topic, ArrayList<String> words, DoublyLinkedList dList){
+        Vocab v = new Vocab(topic, words.toArray(new String[0]));
+        dList.addAtHead(v);
+        System.out.println("Topic: "+ topic);
+        //System.out.println("Words: " + words.size());
+        words = new ArrayList<>();
+
     }
     // OPTION 8
     public static void showAllWordsWithLetter(){

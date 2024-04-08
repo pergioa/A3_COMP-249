@@ -81,10 +81,10 @@ public class DoublyLinkedList {
                 addAtHead(newValue);
             } else {
                 Node n = new Node(newValue, null, null);
-                n.after = position.after;
+                n.after = position;
                 n.before = position.before;
-                position.after.before = n;
-                position.after = n;
+                position.before.after = n;
+                position.before = n;
                 counter++;
             }
         }

@@ -19,8 +19,8 @@ public class Main {
             switch (displayMenu(sc)){
                 case 0: inMenu = false; break;
                 case 1: browseTopic(sc, vocab_list); break;
-                case 2: insertNewTopicBeforeAnotherOne(); break;
-                case 3: insertNewTopicAfterAnotherOne(); break;
+                case 2: insertNewTopicBeforeAnotherOne(sc, vocab_list); break;
+                case 3: insertNewTopicAfterAnotherOne(sc, vocab_list); break;
                 case 4: removeTopic(); break;
                 case 5: modifyTopic(); break;
                 case 6: searchTopicForAWord(); break;
@@ -58,57 +58,147 @@ public class Main {
     }
 
 
-    // OPTION 1
+    // ********************************************* OPTION 1 *********************************************
     public static void browseTopic(Scanner sc, DoublyLinkedList dList){
         boolean inBrowse = true;
-        do {
-            System.out.println("-----------------------------------");
-            System.out.println("         Pick a topic");
-            System.out.println("-----------------------------------");
-            // DISPLAY THE CURRENT TOPICS
-            for (int i = 0; i < dList.getSize(); i++) {
-                System.out.println(i + 1 + "  " + dList.get(i).topic);
-            }
-            System.out.println("0 Exit");
-            System.out.println("-----------------------------------");
-            System.out.print("Enter Your Choice: ");
-            int choice = sc.nextInt();
-            if (choice > dList.getSize()|| choice < 0) {
-                System.out.println("Invalid input, please enter a valid choice");
-            } else {
-                if (choice == 0) {
-                    inBrowse = false;
+        if(dList.getSize() == 0 ){
+            System.out.println("No file could be read, please load a file.");
+        }else {
+            do {
+                System.out.println("-----------------------------------");
+                System.out.println("         Pick a topic");
+                System.out.println("-----------------------------------");
+                // DISPLAY THE CURRENT TOPICS
+                for (int i = 0; i < dList.getSize(); i++) {
+                    System.out.println(i + 1 + "  " + dList.get(i).topic);
+                }
+                System.out.println("0 Exit");
+                System.out.println("-----------------------------------");
+                System.out.print("Enter Your Choice: ");
+                int choice = sc.nextInt();
+                if (choice > dList.getSize() || choice < 0) {
+                    System.out.println("Invalid input, please enter a valid choice");
                 } else {
-                    Vocab v = dList.get(choice-1);
-                    System.out.println("Topic: " + v.topic);
-                    for (int i=0; i<v.words.getSize(); i++){
-                        System.out.println(i+1+" " + v.words.get(i));
+                    if (choice == 0) {
+                        inBrowse = false;
+                    } else {
+                        Vocab v = dList.get(choice - 1);
+                        System.out.println("Topic: " + v.topic);
+                        for (int i = 0; i < v.words.getSize(); i++) {
+                            System.out.println(i + 1 + " " + v.words.get(i));
+                        }
                     }
                 }
-            }
-        }while (inBrowse);
+            } while (inBrowse);
+        }
     }
-    // OPTION 2
-    public static void insertNewTopicBeforeAnotherOne(){
-        System.out.println("2");
-    }
-    // OPTION 3
-    public static void insertNewTopicAfterAnotherOne(){
 
+    // ********************************************* OPTION 2 *********************************************
+    public static void insertNewTopicBeforeAnotherOne(Scanner sc, DoublyLinkedList dList){
+        boolean inInsert = true;
+        String topicToAdd = "";
+        String word = "";
+        ArrayList<String> words = new ArrayList<>();
+        if(dList.getSize() == 0) {
+            System.out.println("There is no file to read, please load a file");
+        }else{
+            do {
+                System.out.println("-----------------------------------");
+                System.out.println("         Pick a topic");
+                System.out.println("-----------------------------------");
+                // DISPLAY THE CURRENT TOPICS
+                for (int i = 0; i < dList.getSize(); i++) {
+                    System.out.println(i + 1 + "  " + dList.get(i).topic);
+                }
+                System.out.println("0 Exit");
+                System.out.println("-----------------------------------");
+                System.out.print("Enter Your Choice: ");
+                int choice = sc.nextInt();
+                sc.nextLine();
+                if (choice > dList.getSize() || choice < 0) {
+                    System.out.println("Invalid input, please enter a valid choice");
+                } else {
+                    if (choice == 0) {
+                        inInsert = false;
+                    } else {
+                        // ASK FOR INFO
+                        System.out.println("Enter a topic name:");
+                        topicToAdd = sc.nextLine();
+                        System.out.println("Enter a word - to quit press Enter");
+                        while (!(word = sc.nextLine()).equals("")){
+                            words.add(word);
+                        }
+                        // CREATE VOCAB AND ADD IT TO DLIST
+                        Vocab v = new Vocab(topicToAdd, words.toArray(new String[0]));
+                        Vocab ref = dList.get(choice-1);
+                        dList.addBefore(ref, v);
+                        // RESET WORDS
+                        words = new ArrayList<>();
+                    }
+                }
+            } while (inInsert);
+        }
+    }
+    // ********************************************* OPTION 3 *********************************************
+    public static void insertNewTopicAfterAnotherOne(Scanner sc, DoublyLinkedList dList){
+        boolean inInsert = true;
+        String topicToAdd = "";
+        String word = "";
+        ArrayList<String> words = new ArrayList<>();
+        if(dList.getSize() == 0) {
+            System.out.println("There is no file to read, please load a file");
+        }else{
+            do {
+                System.out.println("-----------------------------------");
+                System.out.println("         Pick a topic");
+                System.out.println("-----------------------------------");
+                // DISPLAY THE CURRENT TOPICS
+                for (int i = 0; i < dList.getSize(); i++) {
+                    System.out.println(i + 1 + "  " + dList.get(i).topic);
+                }
+                System.out.println("0 Exit");
+                System.out.println("-----------------------------------");
+                System.out.print("Enter Your Choice: ");
+                int choice = sc.nextInt();
+                sc.nextLine();
+                if (choice > dList.getSize() || choice < 0) {
+                    System.out.println("Invalid input, please enter a valid choice");
+                } else {
+                    if (choice == 0) {
+                        inInsert = false;
+                    } else {
+                        // ASK FOR INFO
+                        System.out.println("Enter a topic name:");
+                        topicToAdd = sc.nextLine();
+                        System.out.println("Enter a word - to quit press Enter");
+                        while (!(word = sc.nextLine()).equals("")){
+                            words.add(word);
+                        }
+                        // CREATE VOCAB AND ADD IT TO DLIST
+                        Vocab v = new Vocab(topicToAdd, words.toArray(new String[0]));
+                        Vocab ref = dList.get(choice-1);
+                        dList.addAfter(ref, v);
+                        System.out.println("Succesfully added the new topic and its words");
+                        // RESET WORDS
+                        words = new ArrayList<>();
+                    }
+                }
+            } while (inInsert);
+        }
     }
     // OPTION 4
     public static void removeTopic(){
 
     }
-    // OPTION 5
+    // ********************************************* OPTION 5 *********************************************
     public static void modifyTopic(){
 
     }
-    // OPTION 6
+    // ********************************************* OPTION 6 *********************************************
     public static void searchTopicForAWord(){
 
     }
-    // OPTION 7
+    // ********************************************* OPTION 7 *********************************************
     public static void loadFromFile(Scanner sc, DoublyLinkedList dList){
         System.out.println("Enter the name of the input file:");
         String path = sc.nextLine();
@@ -135,6 +225,7 @@ public class Main {
                 }
             }
             addVocab(topic, words, dList);
+            System.out.println("Done loading");
             reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Input file not found");
@@ -145,11 +236,11 @@ public class Main {
         Vocab v = new Vocab(topic, words.toArray(new String[0]));
         dList.addAtHead(v);
     }
-    // OPTION 8
+    // ********************************************* OPTION 8 *********************************************
     public static void showAllWordsWithLetter(){
 
     }
-    // OPTION 9
+    // ********************************************* OPTION 9 *********************************************
     public static void saveToFile(DoublyLinkedList dList){
         PrintWriter writer = null;
         Vocab v = null;
@@ -163,6 +254,7 @@ public class Main {
                 }
                 writer.println("");
             }
+            System.out.println("File was saved succesfully.");
             writer.close();
         }catch(FileNotFoundException e){
             System.out.println("File to write on was not found");

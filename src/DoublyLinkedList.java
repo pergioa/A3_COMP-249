@@ -131,17 +131,22 @@ public class DoublyLinkedList {
     // Remove value
     public void removeValue(Vocab value){
         Node temp = head;
-        if(temp.value.equals(value)){
-            head = head.before;
-            return;
-        }
-        for(int i = 0; i < counter;++i){
-            if(temp.value.equals(value)){
-                temp.before.after = temp.after;
-                temp.after.before = temp.before;
+
+        if(temp.value.equals(value)) {
+            head = head.after;
+        }else if(tail.value.equals(value)){
+            tail = tail.before;
+        }else {
+            for (int i = 0; i < counter; ++i) {
+                if (temp.value.equals(value)) {
+                    temp.before.after = temp.after;
+                    temp.after.before = temp.before;
+                    break;
+                }
+                temp = temp.after;
             }
-            temp = temp.before;
         }
+        counter--;
     }
 
     // get size

@@ -258,17 +258,17 @@ public class Main {
         System.out.println("-----------------------------------");
         System.out.println("Modify Topics Menu");
         System.out.println("-----------------------------------");
-        System.out.println("a add a topic");
-        System.out.println("r remove a topic");
-        System.out.println("c change a topic");
+        System.out.println("a add a word");
+        System.out.println("r remove a word");
+        System.out.println("c change a word");
         System.out.println("0 exit");
         System.out.println("-----------------------------------");
         System.out.print("Enter your choice: ");
         innerChoice = sc.nextLine();
         switch (innerChoice){
             case "a": optionA(sc); break;
-            case "r": break;
-            case "c": break;
+            case "r": optionB(); break;
+            case "c": optionC(); break;
             case "0": break;
             default:
                 System.out.println("Invalid input, please enter a valid choice.");
@@ -282,6 +282,14 @@ public class Main {
         while(!(word = sc.nextLine()).equals("")){
             // GET ARRAY AND ADD THE WORDS TO IT
         }
+    }
+
+    public static void optionB(){
+
+    }
+
+    public static void optionC(){
+
     }
     // ********************************************* OPTION 6 *********************************************
     public static void searchTopicForAWord(){

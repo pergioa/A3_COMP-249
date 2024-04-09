@@ -246,14 +246,14 @@ public class Main {
                         inModify = false;
                     } else {
                         // GET INFO
-                        getInfoToModifyTopic(sc);
+                        getInfoToModifyTopic(sc, dList, dList.get(choice-1));
                     }
                 }
             } while (inModify);
         }
     }
 
-    public static void getInfoToModifyTopic(Scanner sc){
+    public static void getInfoToModifyTopic(Scanner sc, DoublyLinkedList dList, Vocab v){
         String innerChoice = "";
         System.out.println("-----------------------------------");
         System.out.println("Modify Topics Menu");
@@ -266,8 +266,8 @@ public class Main {
         System.out.print("Enter your choice: ");
         innerChoice = sc.nextLine();
         switch (innerChoice){
-            case "a": optionA(sc); break;
-            case "r": optionB(); break;
+            case "a": optionA(sc, dList, v); break;
+            case "r": optionR(sc, dList, v); break;
             case "c": optionC(); break;
             case "0": break;
             default:
@@ -276,15 +276,32 @@ public class Main {
 
     }
 
-    public static void optionA(Scanner sc){
+    public static void optionA(Scanner sc, DoublyLinkedList dList, Vocab v){
         String word = "";
         System.out.println("Type a word and press Enter, or press Enter to end input");
         while(!(word = sc.nextLine()).equals("")){
             // GET ARRAY AND ADD THE WORDS TO IT
+            if(v.words.indexOf(word) == -1){
+                v.words.addAtHead(word);
+            }else{
+                System.out.println("Sorry, the word: '" + word + "' is already listed");
+            }
         }
     }
 
-    public static void optionB(){
+    public static void optionR(Scanner sc, DoublyLinkedList dList, Vocab v){
+        String word = "";
+
+        System.out.println("Enter a word:");
+
+        if(!((word = sc.nextLine()).equals("") )){
+            int index = v.words.indexOf(word);
+            if(index == -1){
+                System.out.println("Sorry, there is no word: " + word);
+            }else{
+                v.words.removeValue(word);
+            }
+        }
 
     }
 

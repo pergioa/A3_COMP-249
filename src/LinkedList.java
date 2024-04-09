@@ -20,6 +20,20 @@ public class LinkedList {
         return temp.value;
     }
 
+    public int indexOf(String value){
+        int index = -1;
+        Node temp = head;
+        for(int i = 0; i<counter ; i++){
+            if(temp.value.equals(value)){
+                index = i;
+                break;
+            }
+            temp = temp.next;
+        }
+        return index;
+
+    }
+
     // Add to head
     public void addAtHead(String value) {
         head = new Node(value, head);
@@ -119,20 +133,21 @@ public class LinkedList {
         if (head == null) {
             return "";
         }
-        if (head.value == value) {
+        if (head.value.equals(value)) {
             return removeHead();
         } else {
             Node position = head;
 
-            while (position.next != null && position.next.value != value) {
+            while (position.next != null) {
+                if (position.next.value.equals(value)) {
+                    Node temp = position.next;
+                    position.next = position.next.next;
+                    counter--;
+                    return temp.value;
+                }
                 position = position.next;
             }
-            if (position.next.value == value) {
-                Node temp = position.next;
-                position.next = position.next.next;
-                counter--;
-                return temp.value;
-            }
+
         }
         return "";
     }

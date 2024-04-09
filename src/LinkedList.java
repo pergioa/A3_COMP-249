@@ -128,6 +128,13 @@ public class LinkedList {
         }
     }
 
+    public void updateIndexValue(int index, String value){
+        Node temp = head;
+        for(int i = 0 ; i != index ; i++){
+            temp = temp.next;
+        }
+        temp.value = value;
+    }
     // Remove a value
     public String removeValue(String value) {
         if (head == null) {

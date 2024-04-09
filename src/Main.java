@@ -23,9 +23,9 @@ public class Main {
                 case 3: insertNewTopicAfterAnotherOne(sc, vocab_list); break;
                 case 4: removeTopic(sc, vocab_list); break;
                 case 5: modifyTopic(sc, vocab_list); break;
-                case 6: searchTopicForAWord(); break;
+                case 6: searchTopicForAWord(sc, vocab_list); break;
                 case 7: loadFromFile(sc, vocab_list); break;
-                case 8: showAllWordsWithLetter(); break;
+                case 8: showAllWordsWithLetter(sc, vocab_list); break;
                 case 9: saveToFile(vocab_list); break;
                 default: System.out.println("Invalid input, please try again");
             }
@@ -268,7 +268,7 @@ public class Main {
         switch (innerChoice){
             case "a": optionA(sc, dList, v); break;
             case "r": optionR(sc, dList, v); break;
-            case "c": optionC(); break;
+            case "c": optionC(sc, dList, v); break;
             case "0": break;
             default:
                 System.out.println("Invalid input, please enter a valid choice.");
@@ -291,9 +291,7 @@ public class Main {
 
     public static void optionR(Scanner sc, DoublyLinkedList dList, Vocab v){
         String word = "";
-
         System.out.println("Enter a word:");
-
         if(!((word = sc.nextLine()).equals("") )){
             int index = v.words.indexOf(word);
             if(index == -1){
@@ -302,16 +300,44 @@ public class Main {
                 v.words.removeValue(word);
             }
         }
-
     }
 
-    public static void optionC(){
+    public static void optionC(Scanner sc, DoublyLinkedList dList, Vocab v){
+        String word = "";
+        String newWord = "";
+        System.out.println("Enter the word to change: ");
 
+        if(!((word = sc.nextLine()).equals("") )){
+            int index = v.words.indexOf(word);
+            if(index == -1){
+                System.out.println("Sorry, there is no word: " + word);
+            }else{
+                System.out.println("Enter the new word");
+                if(!(newWord = sc.nextLine()).equals("")){
+                    v.words.updateIndexValue(index, newWord);
+                }
+            }
+        }
     }
     // ********************************************* OPTION 6 *********************************************
-    public static void searchTopicForAWord(){
-
+    public static void searchTopicForAWord(Scanner sc, DoublyLinkedList dList){
+        String wordToFind = "";
+        if(dList.getSize() == 0) {
+            System.out.println("There is no file to read, please load a file");
+        }else{
+            System.out.println("Which word do you wish to find");
+            wordToFind = sc.nextLine();
+            // FIND THE WORD
+            for(int i = 0; i<dList.getSize(); i++){
+                if( (dList.get(i).words.indexOf(wordToFind)) != -1 ){
+                    System.out.println("The word: " + wordToFind + " is listed in: " + dList.get(i).topic);
+                    return;
+                }
+            }
+            System.out.println("The word is not listed in any topic");
+        }
     }
+
     // ********************************************* OPTION 7 *********************************************
     public static void loadFromFile(Scanner sc, DoublyLinkedList dList){
         System.out.println("Enter the name of the input file:");
@@ -351,7 +377,7 @@ public class Main {
         dList.addAtHead(v);
     }
     // ********************************************* OPTION 8 *********************************************
-    public static void showAllWordsWithLetter(){
+    public static void showAllWordsWithLetter(Scanner sc, DoublyLinkedList dList){
 
     }
     // ********************************************* OPTION 9 *********************************************

@@ -34,4 +34,9 @@ public class Vocab {
         }
         return isEqual;
     }
+
+    @Override
+    public String toString() {
+        return "Vocab{ topic:'" + topic + ", words:" + words + '}';
+    }
 }

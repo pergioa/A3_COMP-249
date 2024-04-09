@@ -135,7 +135,7 @@ public class DoublyLinkedList {
             head = head.before;
             return;
         }
-        for(int i = 0; i<counter;++i){
+        for(int i = 0; i < counter;++i){
             if(temp.value.equals(value)){
                 temp.before.after = temp.after;
                 temp.after.before = temp.before;

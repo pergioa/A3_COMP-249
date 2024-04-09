@@ -245,10 +245,42 @@ public class Main {
                     if (choice == 0) {
                         inModify = false;
                     } else {
-
+                        // GET INFO
+                        getInfoToModifyTopic(sc);
                     }
                 }
             } while (inModify);
+        }
+    }
+
+    public static void getInfoToModifyTopic(Scanner sc){
+        String innerChoice = "";
+        System.out.println("-----------------------------------");
+        System.out.println("Modify Topics Menu");
+        System.out.println("-----------------------------------");
+        System.out.println("a add a topic");
+        System.out.println("r remove a topic");
+        System.out.println("c change a topic");
+        System.out.println("0 exit");
+        System.out.println("-----------------------------------");
+        System.out.print("Enter your choice: ");
+        innerChoice = sc.nextLine();
+        switch (innerChoice){
+            case "a": optionA(sc); break;
+            case "r": break;
+            case "c": break;
+            case "0": break;
+            default:
+                System.out.println("Invalid input, please enter a valid choice.");
+        }
+
+    }
+
+    public static void optionA(Scanner sc){
+        String word = "";
+        System.out.println("Type a word and press Enter, or press Enter to end input");
+        while(!(word = sc.nextLine()).equals("")){
+            // GET ARRAY AND ADD THE WORDS TO IT
         }
     }
     // ********************************************* OPTION 6 *********************************************

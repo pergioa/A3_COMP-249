@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Vocab {
     String topic;
     LinkedList words;
@@ -15,6 +17,16 @@ public class Vocab {
         this.words = new LinkedList();
         for(String s: words)
             this.words.addAtHead(s);
+    }
+
+    public ArrayList<String> wordsBeginningWith(char l){
+        ArrayList<String> wordsFound = new ArrayList<>();
+        for(int i = 0; i<words.getSize(); i++){
+            if(words.get(i).charAt(0) == l){
+                wordsFound.add(words.get(i));
+            }
+        }
+        return wordsFound;
     }
 
     public boolean equals(Object obj){

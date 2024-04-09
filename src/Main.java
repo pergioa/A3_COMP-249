@@ -134,6 +134,7 @@ public class Main {
                         dList.addBefore(ref, v);
                         // RESET WORDS
                         words = new ArrayList<>();
+                        System.out.println("Successfully added the topic");
                     }
                 }
             } while (inInsert);
@@ -215,9 +216,11 @@ public class Main {
                         Vocab v = dList.get(choice-1);
                         //System.out.println("Vocab: " +  v.toString());
                         dList.removeValue(v);
+                        System.out.println("Topic successfully removed");
                     }
                 }
             } while (inRemove);
+
         }
     }
     // ********************************************* OPTION 5 *********************************************
@@ -378,7 +381,41 @@ public class Main {
     }
     // ********************************************* OPTION 8 *********************************************
     public static void showAllWordsWithLetter(Scanner sc, DoublyLinkedList dList){
+        char letter = ' ';
+        // GET INFO
+        ArrayList<String> wordsFound = new ArrayList<>();
+        System.out.println("Which letter would you like to see the words starting with that letter");
+        letter = sc.next().charAt(0);
+        // GET ALL THE WORDS
+        for (int i = 0; i<dList.getSize();i++){
+            dList.get(i).wordsBeginningWith(letter).forEach(s -> {
+                if(!wordsFound.contains(s)){
+                    wordsFound.add(s);
+                }
+            });
+        }
+        // SORT THE ARRAYLIST
+        String temp = "";
+        boolean swapped;
+        for (int i = 0; i < wordsFound.size() - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < wordsFound.size() - i - 1; j++) {
+                if (wordsFound.get(j).compareTo(wordsFound.get(j+1)) > 0) {
 
+                    // Swap arr[j] and arr[j+1]
+                    temp = wordsFound.get(j);
+                    wordsFound.set(j, wordsFound.get(j+1));
+                    wordsFound.set(j+1, temp);
+                    swapped = true;
+                }
+            }
+            // If no two elements were swapped by inner loop, then break
+            if (swapped == false)
+                break;
+        }
+        // DISPLAY THE ARRAY
+        wordsFound.forEach(System.out::println);
+        System.out.println("The words were successfully sorted.");
     }
     // ********************************************* OPTION 9 *********************************************
     public static void saveToFile(DoublyLinkedList dList){

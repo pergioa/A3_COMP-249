@@ -29,7 +29,7 @@ public class LinkedList {
     }
 
     /**
-     * Get the value of an element in the LinkedList
+     * Get the value of an element in the LinkedList through its index
      * @param index of the value to be found
      * @return value of the node at the specified index
      */
@@ -269,7 +269,7 @@ public class LinkedList {
         // Link
         private Node next;
         /**
-         * Builds a object Node with its data and next node's reference
+         * Builds an object Node with its data and next node's reference
          * @param value of the node
          * @param next is the next node in the list
          */

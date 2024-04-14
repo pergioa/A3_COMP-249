@@ -1,15 +1,38 @@
-public class DoublyLinkedList {
+// -----------------------------------------------------
+// Assignment: 3, COMP249
+// Parts: Doubly LinkedList
+// Written by: Sergio Abreo Alvarez - 40274677 , Arturo Sanchez Escobar - 40283236
+// Purpose: This class is the model for a Doubly LinkedList, it handles all necessary manipulations of its elements
+// Due date: April 15, 2024
+// -----------------------------------------------------
 
+/**
+ * <p> Assignment 3, COMP249</p>
+ * @author Arturo Sanchez - 40283236
+ * @author Sergio Abreo - 40274677
+ * @version 1.0.0
+ * <p> This class is the model for a Doubly LinkedList, it handles all necessary manipulations of its elements</p>
+ * <p>Due date: April 27, 2024</p>
+ */
+public class DoublyLinkedList {
     private Node head;
     private Node tail;
     private int counter;
 
+    /**
+     * Builds a DoublyLinkedList object with no elements
+     */
     public DoublyLinkedList() {
         head = null;
         tail = null;
         counter = 0;
     }
 
+    /**
+     * Get the value of an element in the DoublyLinkedList through its index
+     * @param index of the value to be found
+     * @return value of the node at the specified index
+     */
     public Vocab get(int index){
         Node temp = head;
 
@@ -22,7 +45,10 @@ public class DoublyLinkedList {
         return temp.value;
     }
 
-    // Add at head
+    /**
+     * Add a node at the head of the DoublyLinkedList
+     * @param value of the new head
+     */
     public void addAtHead(Vocab value) {
         Node temp = head;
         head = new Node(value, null, head);
@@ -36,7 +62,10 @@ public class DoublyLinkedList {
         counter++;
     }
 
-    // Add at tail
+    /**
+     * Add a node at the tail of the DoublyLinkedList
+     * @param value of the new tail
+     */
     public void addAtTail(Vocab value) {
         Node temp = tail;
         tail = new Node(value, tail, null);
@@ -49,7 +78,11 @@ public class DoublyLinkedList {
         counter++;
     }
 
-    // Add after (while going from the head to tail)
+    /**
+     * Add a node after the specified reference going from head to tail
+     * @param referenceValue is from which we add the new node after
+     * @param newValue is the value of the new node
+     */
     public void addAfter(Vocab referenceValue, Vocab newValue) {
         Node position = head;
         while (position != null && position.value != referenceValue) {
@@ -70,6 +103,11 @@ public class DoublyLinkedList {
         }
     }
 
+    /**
+     * Add a node before the specified reference going from head to tail
+     * @param referenceValue is from which we add the new node before
+     * @param newValue is the value of the new node
+     */
     public void addBefore(Vocab referenceValue, Vocab newValue) {
         Node position = head;
         while (position != null && !position.value.equals(referenceValue)) {
@@ -90,7 +128,10 @@ public class DoublyLinkedList {
         }
     }
 
-    // Remove head
+    /**
+     * Remove the head of the DoublyLinkedList
+     * @return the value of the deleted head
+     */
     public Vocab removeHead() {
         if (head == null) {
             return null;
@@ -109,7 +150,10 @@ public class DoublyLinkedList {
         }
     }
 
-    // Remove tail
+    /**
+     * Remove the tail of the DoublyLinkedList
+     * @return the value of the deleted tail
+     */
     public Vocab removeTail() {
         if (tail == null) {
             return null;
@@ -128,7 +172,10 @@ public class DoublyLinkedList {
         }
     }
 
-    // Remove value
+    /**
+     * Remove the node with the help of the specified value within the DoublyLinkedList
+     * @param value of the node remove
+     */
     public void removeValue(Vocab value){
         Node temp = head;
 
@@ -149,12 +196,17 @@ public class DoublyLinkedList {
         counter--;
     }
 
-    // get size
+    /**
+     * Get the size of the DoublyLinkedList
+     * @return the size of the DoublyLinkedList
+     */
     public int getSize() {
         return counter;
     }
 
-    // Display
+    /**
+     * Display the DoublyLinkedList from head to tail
+     */
     public void displayFromHeadToTail() {
         if (head == null) {
             System.out.println("The list is empty");
@@ -169,6 +221,9 @@ public class DoublyLinkedList {
         }
     }
 
+    /**
+     * Display the DoublyLinkedList from tail to head
+     */
     public void displayFromTailToHead() {
         if (tail == null) {
             System.out.println("The list is empty.");
@@ -182,6 +237,9 @@ public class DoublyLinkedList {
         }
     }
 
+    /**
+     * This is the basic model for all elements of the single LinkedList, it holds the necessary attributes
+     */
     private class Node {
         // Data
         private Vocab value;
@@ -189,6 +247,12 @@ public class DoublyLinkedList {
         private Node after;
         private Node before;
 
+        /**
+         *Builds an object Node with its data and next and before nodes references
+         * @param value of the node
+         * @param before is the reference of the node before
+         * @param after is the reference of the node after
+         */
         public Node(Vocab value, Node before, Node after) {
             this.value = value;
             this.before = before;

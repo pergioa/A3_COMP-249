@@ -1,7 +1,7 @@
 
 // -----------------------------------------------------
 // Assignment: 3, COMP249
-// Parts: LinkedList
+// Parts: Voab Object
 // Written by: Sergio Abreo Alvarez - 40274677 , Arturo Sanchez Escobar - 40283236
 // Purpose: This class handles the creation of new Vocab objects and LinkedLists. It handles everything related to the topic of a Vocab
 // and its words through the usage of the LinkedList

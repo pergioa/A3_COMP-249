@@ -1,6 +1,6 @@
 // -----------------------------------------------------
 // Assignment: 3, COMP249
-// Parts: LinkedList
+// Parts: Single LinkedList
 // Written by: Sergio Abreo Alvarez - 40274677 , Arturo Sanchez Escobar - 40283236
 // Purpose: This class is the model for a single LinkedList, it handles all necessary manipulations of its elements
 // Due date: April 15, 2024

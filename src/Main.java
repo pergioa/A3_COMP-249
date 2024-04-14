@@ -1,4 +1,12 @@
-import javax.xml.soap.SOAPPart;
+// -----------------------------------------------------
+// Assignment: 3, COMP249
+// Parts: Doubly LinkedList
+// Written by: Sergio Abreo Alvarez - 40274677 , Arturo Sanchez Escobar - 40283236
+// Purpose: This class handles all the main steps of this program, it bridges the back end with the front end. It contains all
+// * the methods needed for this program to add/remove/modify/browse/filter topcs or words in the created lists
+// Due date: April 15, 2024
+// -----------------------------------------------------
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -6,6 +14,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * <p> Assignment 3, COMP249</p>
+ * @author Arturo Sanchez - 40283236
+ * @author Sergio Abreo - 40274677
+ * @version 1.0.0
+ * <p> This class handles all the main steps of this program, it bridges the back end with the front end. It contains all
+ * the methods needed for this program to add/remove/modify/browse/filter topcs or words in the created lists</p>
+ * <p>Due date: April 27, 2024</p>
+ */
 public class Main {
     public static void main(String[] args) {
         DoublyLinkedList vocab_list = new DoublyLinkedList();
@@ -36,6 +53,11 @@ public class Main {
         System.out.println("Thank you for using our program. The program has ended succesfully, have a nice day!");
     }
 
+    /**
+     * Display the main menu
+     * @param sc is the reader of inputs
+     * @return the choice made in the menu
+     */
     public static int displayMenu(Scanner sc){
         System.out.println("-----------------------------------");
         System.out.println("     Vocabulary Control Center");
@@ -59,6 +81,12 @@ public class Main {
 
 
     // ********************************************* OPTION 1 *********************************************
+
+    /**
+     * Browse topics and see how many elements all of them have plus all the words they contain
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void browseTopic(Scanner sc, DoublyLinkedList dList){
         boolean inBrowse = true;
         if(dList.getSize() == 0 ){
@@ -94,6 +122,12 @@ public class Main {
     }
 
     // ********************************************* OPTION 2 *********************************************
+
+    /**
+     * Insert a new topic, therefre a Vocab Object before another one inside the DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void insertNewTopicBeforeAnotherOne(Scanner sc, DoublyLinkedList dList){
         boolean inInsert = true;
         String topicToAdd = "";
@@ -141,6 +175,12 @@ public class Main {
         }
     }
     // ********************************************* OPTION 3 *********************************************
+
+    /**
+     * Insert a new topic, therefre a Vocab Object after another one inside the DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void insertNewTopicAfterAnotherOne(Scanner sc, DoublyLinkedList dList){
         boolean inInsert = true;
         String topicToAdd = "";
@@ -187,7 +227,13 @@ public class Main {
             } while (inInsert);
         }
     }
-    // OPTION 4
+    // ********************************************* OPTION 4 *********************************************
+
+    /**
+     * This method removes a topic, therefore a Vocab ojbect from the DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void removeTopic(Scanner sc, DoublyLinkedList dList){
         boolean inRemove = true;
         if(dList.getSize() == 0) {
@@ -224,6 +270,12 @@ public class Main {
         }
     }
     // ********************************************* OPTION 5 *********************************************
+
+    /**
+     * Modifies the topic inside the DoublyLinkedList whether its adding, removing or modifying a value
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void modifyTopic(Scanner sc, DoublyLinkedList dList){
         boolean inModify = true;
         if(dList.getSize() == 0) {
@@ -256,6 +308,12 @@ public class Main {
         }
     }
 
+    /**
+     * Displays the promps the user in what to do inside modify a topic option in the main menu
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     * @param v is the Vocab object to modify
+     */
     public static void getInfoToModifyTopic(Scanner sc, DoublyLinkedList dList, Vocab v){
         String innerChoice = "";
         System.out.println("-----------------------------------");
@@ -279,6 +337,12 @@ public class Main {
 
     }
 
+    /**
+     * Adds a new value in the DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     * @param v is the Vocab object to add
+     */
     public static void optionA(Scanner sc, DoublyLinkedList dList, Vocab v){
         String word = "";
         System.out.println("Type a word and press Enter, or press Enter to end input");
@@ -292,6 +356,12 @@ public class Main {
         }
     }
 
+    /**
+     * Removes a value from the DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     * @param v is the Vocab object to remove
+     */
     public static void optionR(Scanner sc, DoublyLinkedList dList, Vocab v){
         String word = "";
         System.out.println("Enter a word:");
@@ -305,6 +375,12 @@ public class Main {
         }
     }
 
+    /**
+     * Modifies a value from the DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     * @param v is the Vocab object to modify
+     */
     public static void optionC(Scanner sc, DoublyLinkedList dList, Vocab v){
         String word = "";
         String newWord = "";
@@ -323,6 +399,12 @@ public class Main {
         }
     }
     // ********************************************* OPTION 6 *********************************************
+
+    /**
+     * Searches through all the words of all topics for a specified word
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void searchTopicForAWord(Scanner sc, DoublyLinkedList dList){
         String wordToFind = "";
         if(dList.getSize() == 0) {
@@ -342,6 +424,13 @@ public class Main {
     }
 
     // ********************************************* OPTION 7 *********************************************
+
+    /**
+     * This method will read all the topics and words from a file and create the proper Vocab associated with them and
+     * place them in a DoublyLinkedList
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void loadFromFile(Scanner sc, DoublyLinkedList dList){
         System.out.println("Enter the name of the input file:");
         String path = sc.nextLine();
@@ -375,11 +464,23 @@ public class Main {
         }
     }
 
+    /**
+     * This method creates a new Vocab object and adds it to the DoublyLinkedList
+     * @param topic is the topic of the new Vocab
+     * @param words is the arrayList containing all new words of the new Vocab
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     private static void addVocab(String topic, ArrayList<String> words, DoublyLinkedList dList){
         Vocab v = new Vocab(topic, words.toArray(new String[0]));
         dList.addAtHead(v);
     }
     // ********************************************* OPTION 8 *********************************************
+
+    /**
+     * It displays all the words in all topics that start with a user specified letter
+     * @param sc is the reader of inputs
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void showAllWordsWithLetter(Scanner sc, DoublyLinkedList dList){
         char letter = ' ';
         // GET INFO
@@ -418,6 +519,11 @@ public class Main {
         System.out.println("The words were successfully sorted.");
     }
     // ********************************************* OPTION 9 *********************************************
+
+    /**
+     * It saves all the current topics and words in all the DoublyLinkedList and writes them in a txt file
+     * @param dList is the DoublyLinkedList containing all Vocab objects
+     */
     public static void saveToFile(DoublyLinkedList dList){
         PrintWriter writer = null;
         Vocab v = null;
